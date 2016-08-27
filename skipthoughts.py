@@ -20,7 +20,7 @@ profile = False
 path_to_models = './skip_vector_model/'
 path_to_tables = './skip_vector_model/'
 
-def load_model(path_to_models, path_to_tables):
+def load_model():
     """
     Load the model with saved tables
     """

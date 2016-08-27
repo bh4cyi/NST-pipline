@@ -26,7 +26,7 @@ from vocab import load_dictionary
 from search import gen_sample
 
 # main trainer
-def trainer(X, C, stmodel,
+def trainer(X, C, stmodel, dictionary, saveto,
             dimctx=4800, #vector dimensionality
             dim_word=620, # word vector dimensionality
             dim=1600, # the number of GRU units
@@ -41,8 +41,6 @@ def trainer(X, C, stmodel,
             maxlen_w=100,
             optimizer='adam',
             batch_size = 16,
-            dictionary='',
-            saveto='',
             embeddings=None,
             saveFreq=1000,
             sampleFreq=100,

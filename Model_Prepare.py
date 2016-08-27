@@ -34,7 +34,7 @@ if __name__ == '__main__':
     skmodel = skipthoughts.load_model()
 
     C = X
-    train.trainer(X, C, dictionary='./target_dict/%s.pkl'%target_name, saveto='./target_model/%s.npz'%target_name)
+    train.trainer(X, C, './target_dict/%s.pkl'%target_name, './target_model/%s.npz'%target_name)
     print("Done! Saved model under ./target_model as %s.npz and %s.npz.pkl"%(target_name, target_name))
 
     """
