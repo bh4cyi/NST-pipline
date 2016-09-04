@@ -82,7 +82,6 @@ def encode(model, X, use_norm=True, verbose=True, batch_size=128, use_eos=False)
     """
     # first, do preprocessing
     X = preprocess(X)
-
     # word dictionary and init
     d = defaultdict(lambda : 0)
     for w in model['utable'].keys():
@@ -95,7 +94,7 @@ def encode(model, X, use_norm=True, verbose=True, batch_size=128, use_eos=False)
     captions = [s.split() for s in X]
     for i,s in enumerate(captions):
         ds[len(s)].append(i)
-
+    print ds
     # Get features. This encodes by length, in order to avoid wasting computation
     for k in ds.keys():
         if verbose:

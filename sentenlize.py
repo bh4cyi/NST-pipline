@@ -1,10 +1,16 @@
-import nltk.data
-
-tokenizer = nltk.data.load('tokenizers/punkt/english.pickle')
+import re
 fp = open("./target_text/sent.ascii.txt")
-data = fp.read()
-data =  '\n'.join(tokenizer.tokenize(data)).encode('ascii','ignore')
+text = fp.read()
+sentences = re.split(r'(?<!\w\.\w.)(?<![A-Z][a-z]\.)(?<=\.|\?)\s', text)
+print sentences[1]
+"""
+text_file = open("./target_text/Output.txt", "w")
+for sentence in sentences:
+    if re.match(r'^\s*$', sentence):
+        print 'empty'
+    else:
+        text_file.write("%s\n" % sentence)
 
-text_file = open("Output.txt", "w")
-text_file.write(data)
 text_file.close()
+fp.close()
+"""

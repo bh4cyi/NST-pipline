@@ -36,8 +36,7 @@ def adam(lr, tparams, grads, inp, cost):
         updates.append((v, v_t))
         updates.append((p, p_t))
     updates.append((i, i_t))
-
+    print updates
     f_update = theano.function([lr], [], updates=updates, on_unused_input='ignore', profile=False)
 
     return f_grad_shared, f_update
-

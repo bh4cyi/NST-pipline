@@ -15,7 +15,7 @@ def load_text(loc):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--targe_text', help = 'Location of target text', default = './target_text/sent.ascii.txt')
+    parser.add_argument('--targe_text', help = 'Location of target text', default = './target_text/toy_story.txt')
     args = parser.parse_args()
 
     target_name = args.targe_text.split("/")[-1] # Get target text file name. eg. "speeches.txt"
@@ -39,7 +39,8 @@ if __name__ == '__main__':
     """
     print("Generating style vector for the target text...")
     nltk.download('punkt') # Natural Language Toolkit for skipthoughts encoder.
-
+    print("The lenth of X is:")
+    print len(X)
     skip_vector = skipthoughts.encode(skmodel, X)
     style_vector = skip_vector.mean(0) # 0 indicate that mean method is performed over multiple axes, see numpy.mean document
     np.save('./target_style/%s_style.npy'%target_name, style_vector)
