@@ -12,7 +12,7 @@ import re
 
 def load_text(loc):
     text = []
-    f = open(loc)
+    f = open(loc, 'r', encoding = 'ascii', errors = ignore)
     for line in f:
         if not re.match(r'^\s*$', line):
             text.append(line.strip())
@@ -89,4 +89,4 @@ if __name__ == '__main__':
     #train.trainer(X, C, skmodel, './target_dict/%s.pkl'%target_name, './target_model/%s.npz'%target_name)
     #print("Done! Saved model under ./target_model as %s.npz and %s.npz.pkl"%(target_name, target_name))
     train.trainer(X, C, skmodel, './%s/%s.pkl'%(target_name, target_name), './%s/%s.npz'%(target_name, target_name))
-    print("Done! Saved model under ./%s as %s.npz and %s.npz.pkl"%(target_name, target_name, target_name))
+    print("Done! Saved model under ./%s/ as %s.npz and %s.npz.pkl"%(target_name, target_name, target_name))
