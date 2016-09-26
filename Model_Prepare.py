@@ -5,13 +5,43 @@ import train # Library to generate model of target text.
 import argparse
 import numpy as np
 import nltk
+import urllib
+import os.path
+import sys
+import re
 
 def load_text(loc):
     text = []
     f = open(loc)
     for line in f:
-        text.append(line.strip())
+        if not re.match(r'^\s*$', line):
+            text.append(line.strip())
     return text
+
+
+def reporthook(blocknum, blocksize, totalsize):
+    readsofar = blocknum * blocksize
+    if totalsize > 0:
+        percent = readsofar * 1e2 / totalsize
+        s = "\r%5.1f%% %*d / %d" % (
+            percent, len(str(totalsize)), readsofar, totalsize)
+        sys.stderr.write(s)
+        if readsofar >= totalsize: # near the end
+            sys.stderr.write("\n")
+    else: # total size is unknown
+        sys.stderr.write("read %d\n" % (readsofar,))
+
+def download_model():
+    DOWNLOADS_DIR = os.getcwd()+'/skip_vector_model/'
+    for url in open('skip_vector_model_url'):
+        filename = url.rstrip("\n").split('/')[-1]
+        filepath = os.path.join(DOWNLOADS_DIR, filename)
+
+        if not os.path.isfile(filepath):
+            print(filename + ' doesn\'t exist. Start downloading')
+            urllib.urlretrieve(url, filepath, reporthook)
+
+
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
@@ -20,6 +50,7 @@ if __name__ == '__main__':
 
     target_name = args.targe_text.split("/")[-1] # Get target text file name. eg. "speeches.txt"
 
+    download_model()
     print("Loading Skip-Vector Model...")
     skmodel = skipthoughts.load_model()
     print("Done!")

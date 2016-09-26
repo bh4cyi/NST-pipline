@@ -1,5 +1,5 @@
 import re
-fp = open("./target_text/target.txt")
+fp = open("./target_text/sent.ascii.txt")
 for line in fp:
     if re.match(r'^\s*$', line):
         print 'empty'

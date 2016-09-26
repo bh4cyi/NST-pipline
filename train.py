@@ -125,7 +125,6 @@ def trainer(X, C, stmodel, dictionary, saveto,
 
     # weight decay, if applicable
     if decay_c > 0.:
-        print 'AAAAAAAAAAAAAAAAAAAAAAAAA'
         decay_c = theano.shared(numpy.float32(decay_c), name='decay_c')
         weight_decay = 0.
         for kk, vv in tparams.iteritems():
