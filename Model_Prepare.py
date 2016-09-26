@@ -12,8 +12,9 @@ import re
 
 def load_text(loc):
     text = []
-    f = open(loc, 'r', encoding = 'ascii', errors = ignore)
+    f = open(loc)
     for line in f:
+        line = line.encode('ascii',errors='ignore')
         if not re.match(r'^\s*$', line):
             text.append(line.strip())
     return text
